@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Contributors</title>
+        <meta charset="UTF-8">
+
+        <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="css/contributors.css">
+    </head>
+        <body>
+            <header>
+                <nav>
+                    <ul class="left-nav">
+                        <li>
+                            <a href="index.html">
+                                <img class="img" src="assets/icons/logo_bg.png" alt="trustip" width="104" height="32">
+                            </a>
+                        </li>
+                        <li>
+                            <a href="globe.html">
+                                <img class="img" src="assets/icons/globe.png" alt="Globe" width="32" height="32">
+                            </a>
+                        </li>
+                        <li>
+                            <a href="leaderboard.html">
+                                <img class="img" src="assets/icons/leaderboard.png" alt="Leaderboard" width="32" height="32">
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="right-nav">
+                        <li>
+                            <a href="contributors.html">
+                                <img class="img selected" src="assets/icons/warning.png" alt="Contribute" width="32" height="32">
+                            </a>
+                        </li>
+                        <li>
+                            <a href="login.html">
+                                <img class="img" src="assets/icons/user.png" alt="User" width="32" height="32">
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </header>
+
+            <main>
+                <div class="elevated-card title-card">
+                    <h1>Report IP Address</h1>
+                </div>
+
+                <div class="elevated-card content-card">
+                    <form class="report-form-fields" action="globe.html" method="get">
+                        <div class="form-row">
+                          <input type="text" name="ip" placeholder="Enter IP address..." required>
+                          <select name="category" required>
+                            <option value="">...</option>
+                            <option value="phishing">Phishing</option>
+                            <option value="malware">Malware</option>
+                            <option value="spam">Spam</option>
+                            <option value="botnet">Botnet</option>
+                          </select>
+                        </div>
+                      
+                        <textarea name="description" placeholder="Describe the situation..." rows="5" required></textarea>
+                      
+                        <div>
+                          <button class="button report" type="submit">Report</button>
+                        </div>
+                    </form>
+                </div>
+            </main>
+
+            <footer>
+                <nav>
+                    <ul class="left-footer">
+                        <li>
+                            <a href="https://www.usc.gal/gl">Contacto</a>
+                        </li>
+                    </ul>
+                    <ul class="right-footer">
+                        <li>
+                            <a href="https://www.usc.gal/gl">©trustip</a>
+                        </li>
+                    </ul>
+                </nav>
+            </footer>
+
+        </body>
+</html>

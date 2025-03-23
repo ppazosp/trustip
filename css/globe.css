@@ -1,0 +1,148 @@
+.search-container {
+    background-color: var(--background-dark);
+    border-radius: 16px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    max-width: 512px;
+    width: 100%;
+    padding: 12px 18px;
+    margin-bottom: 24px;
+}
+  
+.search-form {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+  
+.search-form input {
+    flex: 1;
+    padding: 10px 16px;
+    border: none;
+    border-radius: 16px;
+    background-color: #000;
+    color: white;
+    font-size: 18px;
+    box-shadow: inset 2px 2px 5px rgba(255, 255, 255, 0.05);
+    transition: all 0.3s ease;
+}
+  
+.search-form input::placeholder {
+    color: #aaa;
+    font-style: italic;
+}
+  
+.search-form input:focus {
+    outline: none;
+    border: 1px solid #123D15;
+    box-shadow: 0 0 8px rgba(66, 202, 39, 0.7);
+}
+  
+.search-icon {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s, filter 0.2s;
+    filter: brightness(0.8);
+}
+  
+.search-icon:hover {
+    transform: scale(1.1);
+    filter: brightness(1);
+}
+
+.globe-container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 84px;
+}
+
+.country-card {
+    display: flex;
+    background-color: var(--background-dark);
+    border-radius: 16px;
+    padding: 32px;
+    box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.4);
+    color: white;
+    gap: 32px;
+    font-family: Arial, sans-serif;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.country-card h2 {
+    font-size: 28px;
+    margin-bottom: 16px;
+    text-align: left;
+}
+
+.ip-table table {
+    width: 100%;
+    font-family: monospace;
+    font-size: 14px;
+    border-collapse: collapse;
+}
+
+.ip-table thead th {
+    text-align: left;
+    padding-bottom: 4px;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+
+}
+
+.ip-table tbody tr {
+    display: table-row;
+}
+
+.ip-table thead th:nth-child(1),
+.ip-table tbody td:nth-child(1) {
+    width: 140px;
+    text-align: left;
+}
+
+.ip-table thead th:nth-child(3){
+    text-align: left;
+}
+
+.ip-table tbody td:nth-child(2) {
+    width: 60px;
+    text-align: center;
+}
+
+.ip-table tbody td:nth-child(3) {
+    width: 100px;
+    text-align: left;
+}
+
+.map-stats {
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 12px;
+}
+
+.map-stats .rank {
+    font-size: 18px;
+}
+
+.map-stats .rank strong {
+    font-size: 32px;
+}
+
+.ip-scroll {
+    max-height: 312px;
+    overflow-y: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.ip-scroll::-webkit-scrollbar {
+    display: none;
+}

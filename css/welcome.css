@@ -1,0 +1,61 @@
+section.elevated-card {
+    text-align: center;
+    max-width: 750px;
+}
+
+h2 {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 16px;
+}
+
+.list-card {
+    display: flex;
+    justify-content: center;
+}
+
+.list-card ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    padding: 0;
+}
+
+.list-card ul li {
+    text-align: center;
+}
+
+.list-card ul li img {
+    height: 64px;
+    width: 64px;
+    border-radius: 50%;
+    background-color: #333;
+    padding: 8px;
+}
+
+.list-card ul li p {
+    margin: 4px 0 0px;
+    font-weight: bold;
+}
+
+.list-card ul li a {
+    color: white;
+    font-size: 12px;
+    text-decoration: none;
+    opacity: 0.8;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.list-card ul li a:hover {
+    opacity: 1;
+}
+
+.button.welcome{
+    background-color: var(--primary-color);
+    border-color: var(--light-green);
+}
+
+.button.welcome:hover{
+    background-color: var(--light-green);
+}
