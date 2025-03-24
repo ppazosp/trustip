@@ -59,3 +59,9 @@ h2 {
 .button.welcome:hover{
     background-color: var(--light-green);
 }
+
+.description{
+    column-count: 2;
+    column-gap: 32px;
+    text-align: justify;
+}
