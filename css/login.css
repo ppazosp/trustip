@@ -16,7 +16,7 @@
 .logo-section img {
   height: auto;
   object-fit: contain;
-  float: right;
+  width: 70%;
 }
 
 
@@ -91,4 +91,15 @@
 
 .button.signup:hover{
   background-color: var(--light-yellow);
+}
+
+@media screen and (max-width: 600px) {
+  .login-container{
+    flex-direction: column;
+  }
+
+  .logo-section img{
+    width: 90%;
+  }
+
 }
