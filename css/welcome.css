@@ -1,54 +1,42 @@
-section.elevated-card {
-    text-align: center;
-    max-width: 100%;
-}
-
 h2 {
     font-size: 20px;
     font-weight: bold;
     margin-bottom: 16px;
 }
 
+main{
+    gap: 12px;
+}
+
 .list-card {
     display: flex;
+    flex-direction: row;
     justify-content: center;
+    gap: 32px;
+    flex-wrap: wrap;
 }
 
-.list-card ul {
-    list-style: none;
-    display: flex;
-    justify-content: center;
-    gap: 40px;
-    padding: 0;
+.elevated-card{
+    max-width: 100%;
 }
 
-.list-card ul li {
+.user-card {
     text-align: center;
-}
-
-.list-card ul li img {
-    height: 64px;
-    width: 64px;
-    border-radius: 50%;
-    background-color: #333;
-    padding: 8px;
-}
-
-.list-card ul li p {
-    margin: 4px 0 0px;
-    font-weight: bold;
-}
-
-.list-card ul li a {
     color: white;
-    font-size: 12px;
-    text-decoration: none;
-    opacity: 0.8;
-    transition: opacity 0.3s ease-in-out;
+    min-width: 250px;
 }
 
-.list-card ul li a:hover {
-    opacity: 1;
+.user-card img {
+    display: block;
+    margin: 0 auto 8px;
+}
+
+.user-card .email {
+    color: #ccc;
+    font-size: 14px;
+    display: block;
+    margin-top: 4px;
+    text-decoration: underline;
 }
 
 .button.welcome{
@@ -65,7 +53,23 @@ h2 {
 }
 
 .description{
-    column-count: 2;
+    width: 60%;
+    column-count: 3;
     column-gap: 32px;
     text-align: justify;
+}
+
+@media screen and (max-width: 600px){
+    .description{
+        column-count: 1;
+    }
+
+    .list-card{
+        flex-direction: column;
+
+    }
+
+    .elevated-card{
+        width: 100%;
+    }
 }
