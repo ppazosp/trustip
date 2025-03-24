@@ -73,7 +73,7 @@
     box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.4);
     color: white;
     font-family: Arial, sans-serif;
-    width: 100%;
+    width: 90%;
 }
 
 .country{
@@ -81,7 +81,7 @@
     flex-direction: row;
     align-items: center;
     gap: 32px;
-
+    width: 100%;
 }
 
 .country-card h2 {
@@ -114,7 +114,7 @@
 .ip-table tbody td:nth-child(1),
 .ip-table thead th:nth-child(1) {
     text-align: left;
-    width: 140px;
+    width: 128px;
 }
 
 .ip-table tbody td:nth-child(2) {
@@ -190,6 +190,10 @@
     }
 
     .search-container{
+        width: 100%;
+    }
+
+    .country-card{
         width: 100%;
     }
 }
