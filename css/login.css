@@ -16,6 +16,7 @@
 .logo-section img {
   height: auto;
   object-fit: contain;
+  float: right;
 }
 
 
