@@ -60,6 +60,10 @@ h2 {
     background-color: var(--light-green);
 }
 
+.title-card{
+    margin-bottom: 20px;
+}
+
 .description{
     column-count: 2;
     column-gap: 32px;

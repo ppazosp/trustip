@@ -10,22 +10,20 @@ main {
 
 .report-form {
     gap: 24px;
-    padding: 32px;
     background-color: var(--background-dark);
     border-radius: 24px;
     box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.4);
-    margin: 0 auto;
     color: white;
     justify-items: center;
 }
 
 .report-form-fields {
-    display: grid;
     width: 100%;
+    display: grid;
     gap: 16px;
-    grid-template-columns: 2fr 2fr 1fr 1fr;
+    grid-template-columns: 2fr 2fr  1fr 1fr;
     grid-template-areas:
-        "ip category none button"
+        "ip category . button"
         "textarea textarea textarea textarea";
 }
 
@@ -62,8 +60,7 @@ main {
     border-radius: 16px;
     background-color: #000;
     color: white;
-    font-size: 14px;
-    min-width: 512px;
+    font-size: 16px;
     min-height: 256px;
     box-shadow: inset 0 0 12px rgba(0, 0, 0, 0.7);
     transition: box-shadow 0.3s ease;
@@ -117,18 +114,36 @@ section image {
     margin-top: 0;
 }
 
+.form-button {
+    grid-area: button;
+    display: flex;
+    justify-content: right;
+  }
+
 .report-form-fields textarea {
     grid-area: textarea;
     width: 100%;
 }
 
-.report-form select:focus,
-.report-form textarea:focus {
-    outline: none;
-    box-shadow: 0 0 10px rgba(66, 202, 39, 0.7);
-}
-
 .report-form textarea::placeholder {
     color: #aaa;
     font-style: italic;
+}
+
+@media screen and (max-width: 600px) {
+    .report-form-fields{
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas:
+        "ip category"
+        "textarea textarea"
+        "button button";
+    }
+
+    main{
+        margin-top: 8px;
+    }
+
+    .form-button{
+        justify-content: center;
+    }
 }
