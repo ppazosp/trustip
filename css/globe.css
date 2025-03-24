@@ -2,10 +2,9 @@
     background-color: var(--background-dark);
     border-radius: 16px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    max-width: 512px;
-    width: 100%;
+    width: 40%;
     padding: 12px 18px;
-    margin-bottom: 24px;
+    margin-bottom: 16px;
 }
   
 .search-form {
@@ -54,24 +53,35 @@
     filter: brightness(1);
 }
 
-.globe-container{
+
+
+
+.globe-container {
     display: flex;
     flex-direction: row;
     align-items: center;
     gap: 84px;
+    padding: 0px 64px;
 }
 
 .country-card {
     display: flex;
+    flex-direction: column;
     background-color: var(--background-dark);
     border-radius: 16px;
     padding: 32px;
     box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.4);
     color: white;
-    gap: 32px;
     font-family: Arial, sans-serif;
-    max-width: 900px;
-    margin: 0 auto;
+    width: 100%;
+}
+
+.country{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 32px;
+
 }
 
 .country-card h2 {
@@ -85,51 +95,44 @@
     font-family: monospace;
     font-size: 14px;
     border-collapse: collapse;
+    table-layout: fixed;
+    word-wrap: break-word;
 }
 
 .ip-table thead th {
-    text-align: left;
+    text-align: center;
     padding-bottom: 4px;
     font-size: 14px;
     font-weight: bold;
     text-align: center;
-
 }
 
 .ip-table tbody tr {
     display: table-row;
 }
 
-.ip-table thead th:nth-child(1),
-.ip-table tbody td:nth-child(1) {
+.ip-table tbody td:nth-child(1),
+.ip-table thead th:nth-child(1) {
+    text-align: left;
     width: 140px;
-    text-align: left;
-}
-
-.ip-table thead th:nth-child(3){
-    text-align: left;
 }
 
 .ip-table tbody td:nth-child(2) {
-    width: 60px;
     text-align: center;
 }
 
-.ip-table tbody td:nth-child(3) {
-    width: 100px;
-    text-align: left;
+.ip-table tbody td:nth-child(3),
+.ip-table thead th:nth-child(3) {
+    text-align: center;
 }
 
 .map-stats {
-    text-align: left;
+    text-align: center;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 12px;
-}
-
-.map-stats img{
-    float: right;
+    align-items: center;
+    gap: 8px;
 }
 
 .map-stats .rank {
@@ -143,10 +146,50 @@
 .ip-scroll {
     max-height: 312px;
     overflow-y: auto;
+    overflow-x: auto;
+    max-width: 100%;
     scrollbar-width: none;
     -ms-overflow-style: none;
 }
 
 .ip-scroll::-webkit-scrollbar {
     display: none;
+}
+
+.globe {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.globe img {
+    width: 100%;
+    height: auto;
+}
+
+@media screen and (max-width: 600px) {
+    html, body {
+        overflow: scroll;
+    }
+
+    .globe-container {
+        flex-direction: column;
+        padding: 0;
+    }
+
+    .ip-scroll {
+        overflow-x: auto;
+    }
+
+    .ip-table table td {
+        word-break: break-word;
+    }
+
+    .country {
+        flex-direction: column;
+    }
+
+    .search-container{
+        width: 100%;
+    }
 }
