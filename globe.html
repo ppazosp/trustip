@@ -5,8 +5,9 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <link rel="stylesheet" href="css/main.css">
-        <link rel="stylesheet" href="css/globe.css">
+        <link rel="stylesheet" href="styles/main.css">
+        <link rel="stylesheet" href="styles/globe.css">
+
     </head>
     <body>
         <header>
@@ -58,7 +59,7 @@
                     <h2>Spain</h2>
                     <div class="country">
                         <div class="map-stats">
-                            <img src="images/spain.png" alt="Spain" width="200">
+                            <img src="assets/imgs/spain.png" alt="Spain" width="200">
                             <p class="rank"><span>Rank:</span> <strong>5</strong></p>
                             <p>IPs reported last Month: 15</p>
                             <p>IPs reported in total: 210</p>
@@ -114,7 +115,50 @@
                 </div>
 
                 <div class="globe">
-                    <img src="images/big_globe.png" alt="globe" width="600" height="600">
+                    <div class="app-wrapper">
+                        <ul class="markers"></ul>
+                    </div>
+
+                    <script>
+                        if (window.innerWidth > 600) {
+                          const scriptUrls = [
+                            "https://cdnjs.cloudflare.com/ajax/libs/three.js/106/three.min.js",
+                            "https://cdnjs.cloudflare.com/ajax/libs/stats.js/r16/Stats.min.js",
+                            "https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.7.6/dat.gui.min.js",
+                            "https://cdnjs.cloudflare.com/ajax/libs/tween.js/17.4.0/Tween.min.js",
+                            "https://cdnjs.cloudflare.com/ajax/libs/fabric.js/3.3.2/fabric.min.js",
+                            "https://cdnjs.cloudflare.com/ajax/libs/chroma-js/2.0.4/chroma.min.js",
+                            "libs/THREE.MeshLine.js",
+                            "https://d3js.org/d3-array.v1.min.js",
+                            "https://d3js.org/d3-geo.v1.min.js",
+                            "libs/orbit-controls.js",
+                            "libs/trackball-controls.js",
+                            "libs/perlin-noise.js",
+                            "assets/data/processing.js",
+                            "scripts/config.js",
+                            "scripts/app.js",
+                            "scripts/shaders.js",
+                            "scripts/index.js",
+                            "assets/data/countries.js",
+                            "assets/data/connections.js",
+                            "assets/data/grid.js",
+                            "scripts/globe.js",
+                            "scripts/points.js",
+                            "scripts/marker.js",
+                            "scripts/markers.js",
+                            "scripts/lines.js",
+                            "scripts/dots.js",
+                            "scripts/utils.js"
+                          ];
+                      
+                          scriptUrls.forEach(src => {
+                            const script = document.createElement('script');
+                            script.src = src;
+                            script.defer = true;
+                            document.body.appendChild(script);
+                          });
+                        }
+                    </script>
                 </div>
             </section>
         </main>
