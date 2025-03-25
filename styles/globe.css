@@ -65,6 +65,7 @@ main{
     padding-right: 0;
     flex-wrap: nowrap;
     width: 100%;
+    gap: 64px;
 }
 
 .country-card {
@@ -79,6 +80,7 @@ main{
     font-family: Arial, sans-serif;
     flex: 1;
     width: 100%;
+    max-width: 600px;
     height: 100%;
 }
 
@@ -164,11 +166,12 @@ main{
 
 .globe {
     display: flex;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
     flex: 1.5;
-    width: 600px;
-    height: 600px;
+    max-width: 600px;
+    aspect-ratio: 1 / 1;
 }
 
 @media screen and (max-width: 600px) {
@@ -203,6 +206,7 @@ main{
 
     .country-card{
         width: 100%;
+        margin-top: 16px;
     }
 
     .globe{
