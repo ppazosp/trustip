@@ -10,20 +10,8 @@ const data = {}
 
 async function preload() {
   try {
-    // const gridUrl = '../assets/data/grid.json';
-    // const gridRes = await fetch(gridUrl);
-    // const grid = await gridRes.json();
-    // data.grid = grid;
 
-    // const countryUrl = '../assets/data/countries.json';
-    // const countryRes = await fetch(countryUrl);
-    // const countries = await countryRes.json();
-    // data.countries = countries;
-
-    // const connectionsUrl = '../assets/data/connections.json';
-    // const connectionsRes = await fetch(connectionsUrl);
-    // const connections = await connectionsRes.json();
-    // data.connections = getCountries(connections, countries);    
+    await loadCountriesData();
 
     return true;
   } catch(error) {
@@ -31,35 +19,66 @@ async function preload() {
   }
 }
 
+async function loadCountriesData() {
+  try {
+    const response = await fetch('assets/data/countries.json');
+    data.countries = await response.json();
+  } catch (error) {
+    console.error("Error al cargar countries.json:", error);
+  }
+}
+
+function updateIpTable(ips) {
+  const tbody = document.querySelector('.ip-scroll table tbody');
+  tbody.innerHTML = "";
+  ips.forEach(entry => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td>${entry.ip}</td>
+      <td>${entry.nor}</td>
+      <td>${entry.dlr}</td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+
 function onMouseClick(event) {
   event.preventDefault();
-
-  console.log("Click event fired!");
   
   const container = document.querySelector('.globe');
   const rect = container.getBoundingClientRect();
-  
   const mouse = new THREE.Vector2();
   mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
   mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
-
+  
   const raycaster = new THREE.Raycaster();
   raycaster.setFromCamera(mouse, app.camera);
-
   const intersects = raycaster.intersectObjects(groups.markers.children, true);
-  console.log("Intersections:", intersects);
-
+  
   if (intersects.length > 0) {
     let markerObject = intersects[0].object;
-    while (markerObject.parent && markerObject.name !== 'Marker') {
+    while (markerObject && markerObject.name !== 'Marker') {
       markerObject = markerObject.parent;
     }
-    console.log("Final marker object:", markerObject);
-    
-    const countryName = markerObject.userData.countryName;
+    const countryName = markerObject ? markerObject.userData.countryName : null;
     if (countryName) {
-      console.log(countryName);
-      document.querySelector('.country-card h2').textContent = countryName;
+      console.log("Selected Country:", countryName);
+
+      const info = data.countries.find(c => c.name.toLowerCase() === countryName.toLowerCase());
+      if (info) {
+        document.querySelector('.country-card h2').textContent = info.name;
+
+        const countryImage = document.querySelector('.map-stats img');
+        countryImage.src = info.image;
+        countryImage.alt = info.name;
+
+        document.querySelector('.map-stats .rank strong').textContent = info.ranking;
+
+        document.querySelector('.map-stats p:nth-child(3)').textContent = "IPs reported last Month: " + info.ips_last_month;
+        document.querySelector('.map-stats p:nth-child(4)').textContent = "IPs reported in total: " + info.ips_total;
+
+        updateIpTable(info.ips);
+      }
     }
   }
 }

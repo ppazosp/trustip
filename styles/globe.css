@@ -65,6 +65,7 @@ main{
     align-items: center;
     justify-content: center;
     padding: 24px;
+    padding-top: 0;
     padding-right: 0;
     flex-wrap: nowrap;
     width: 100%;
@@ -90,7 +91,7 @@ main{
 .country{
     display: flex;
     flex-direction: row;
-    align-items: center;
+    align-items: top;
     gap: 32px;
     width: 100%;
 }
@@ -144,6 +145,12 @@ main{
     justify-content: center;
     align-items: center;
     gap: 8px;
+}
+
+.map-stats img{
+    width: 200px;
+    height: 200px;
+    object-fit: contain;
 }
 
 .map-stats .rank {
