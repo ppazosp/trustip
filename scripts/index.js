@@ -76,23 +76,28 @@ function onMouseClick(event) {
         const countryImage = document.querySelector('.map-stats img');
         countryImage.src = info.image;
         countryImage.alt = info.name;
-        document.querySelector('.map-stats .rank strong').textContent = info.ranking;
+        document.querySelector('.map-stats .rank strong').textContent = "Rank: " + info.ranking;
         document.querySelector('.map-stats p:nth-child(3)').textContent = "IPs reported last Month: " + info.ips_last_month;
         document.querySelector('.map-stats p:nth-child(4)').textContent = "IPs reported in total: " + info.ips_total;
         updateIpTable(info.ips);
     
+        const globe = document.querySelector('.globe');
+        globe.classList.add('shifted');
+    
         if (!cardAnimated) {
           card.classList.add('show');
-
           card.addEventListener('animationend', function handler() {
             countryInfo.classList.add('show');
             card.removeEventListener('animationend', handler);
             cardAnimated = true;
           });
         } else {
-          countryInfo.classList.remove('show');
-          void countryInfo.offsetWidth; 
-          countryInfo.classList.add('show');
+          countryImage.onload = () => {
+            console.log("Image loaded, now animating...");
+            countryInfo.classList.remove('show');
+            void countryInfo.offsetWidth; 
+            countryInfo.classList.add('show');
+          };
         }
       }
     }
