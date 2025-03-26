@@ -20,12 +20,62 @@ async function preload() {
   }
 }
 
+function populateCountryDatalist() {
+  const datalist = document.getElementById("countries");
+  datalist.innerHTML = "";
+  data.countries.forEach(country => {
+    const option = document.createElement("option");
+    option.value = country.name;
+    datalist.appendChild(option);
+  });
+}
+
 async function loadCountriesData() {
   try {
     const response = await fetch('assets/data/countries.json');
     data.countries = await response.json();
+    populateCountryDatalist();
   } catch (error) {
     console.error("Error al cargar countries.json:", error);
+  }
+}
+
+function selectCountry(countryName) {
+  const info = data.countries.find(c => c.name.toLowerCase() === countryName.toLowerCase());
+  if (info) {
+    console.log("Selected Country:", info.name);
+
+    const card = document.querySelector('.country-card');
+    const countryInfo = document.querySelector('.country-info');
+    const countryTitle = document.querySelector('.country-card h2');
+
+    countryTitle.textContent = info.name;
+    const countryImage = document.querySelector('.map-stats img');
+    countryImage.src = info.image;
+    countryImage.alt = info.name;
+    document.querySelector('.map-stats .rank span').textContent = "Rank: ";
+    document.querySelector('.map-stats .rank strong').textContent = info.ranking;
+    document.querySelector('.map-stats p:nth-child(3)').textContent = "IPs reported last Month: " + info.ips_last_month;
+    document.querySelector('.map-stats p:nth-child(4)').textContent = "IPs reported in total: " + info.ips_total;
+    updateIpTable(info.ips);
+
+    const globe = document.querySelector('.globe');
+    globe.classList.add('shifted');
+
+    if (!cardAnimated) {
+      card.classList.add('show');
+      card.addEventListener('animationend', function handler() {
+        countryInfo.classList.add('show');
+        card.removeEventListener('animationend', handler);
+        cardAnimated = true;
+      });
+    } else {
+      countryInfo.classList.remove('show');
+      void countryInfo.offsetWidth; 
+      countryInfo.classList.add('show');
+    }
+  } else {
+    console.log("Country not found:", countryName);
   }
 }
 
@@ -63,45 +113,24 @@ function onMouseClick(event) {
     }
     const countryName = markerObject ? markerObject.userData.countryName : null;
     if (countryName) {
-      console.log("Selected Country:", countryName);
-
-      const info = data.countries.find(c => c.name.toLowerCase() === countryName.toLowerCase());
-
-      if (info) {
-        const card = document.querySelector('.country-card');
-        const countryInfo = document.querySelector('.country-info');
-        const countryTitle = document.querySelector('.country-card h2');
-    
-        countryTitle.textContent = info.name;
-        const countryImage = document.querySelector('.map-stats img');
-        countryImage.src = info.image;
-        countryImage.alt = info.name;
-        document.querySelector('.map-stats .rank span').textContent = "Rank: ";
-        document.querySelector('.map-stats .rank strong').textContent = info.ranking;
-        document.querySelector('.map-stats p:nth-child(3)').textContent = "IPs reported last Month: " + info.ips_last_month;
-        document.querySelector('.map-stats p:nth-child(4)').textContent = "IPs reported in total: " + info.ips_total;
-        updateIpTable(info.ips);
-    
-        const globe = document.querySelector('.globe');
-        globe.classList.add('shifted');
-    
-        if (!cardAnimated) {
-          card.classList.add('show');
-          card.addEventListener('animationend', function handler() {
-            countryInfo.classList.add('show');
-            card.removeEventListener('animationend', handler);
-            cardAnimated = true;
-          });
-        } else {
-          countryImage.onload = () => {
-            console.log("Image loaded, now animating...");
-            countryInfo.classList.remove('show');
-            void countryInfo.offsetWidth; 
-            countryInfo.classList.add('show');
-          };
-        }
-      }
+      selectCountry(countryName);
     }
+  }
+}
+
+function onSubmit(event){
+  event.preventDefault();
+  const searchInput = document.querySelector('.search-form input[name="search"]');
+  const query = searchInput.value.trim();
+  if (query) {
+    selectCountry(query);
+  }
+}
+
+function onChange(event){
+  const query = event.target.value.trim();
+  if (query) {
+    selectCountry(query);
   }
 }
 
@@ -169,6 +198,10 @@ function setup(app) {
   groups.globe.add(groups.lines);*/
 
   container.addEventListener('click', onMouseClick, false);
+
+  document.querySelector('.search-form').addEventListener('submit', onSubmit);
+
+  document.querySelector('.search-form input[name="search"]').addEventListener('change', onChange);
 
 
   app.scene.add(groups.main);
