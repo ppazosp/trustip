@@ -6,6 +6,7 @@ window.onresize = app.handleResize;
 const loader = new THREE.TextureLoader();
 const controls = {}
 const data = {}
+let  cardAnimated = false;
 
 
 async function preload() {
@@ -65,19 +66,34 @@ function onMouseClick(event) {
       console.log("Selected Country:", countryName);
 
       const info = data.countries.find(c => c.name.toLowerCase() === countryName.toLowerCase());
-      if (info) {
-        document.querySelector('.country-card h2').textContent = info.name;
 
+      if (info) {
+        const card = document.querySelector('.country-card');
+        const countryInfo = document.querySelector('.country-info');
+        const countryTitle = document.querySelector('.country-card h2');
+    
+        countryTitle.textContent = info.name;
         const countryImage = document.querySelector('.map-stats img');
         countryImage.src = info.image;
         countryImage.alt = info.name;
-
         document.querySelector('.map-stats .rank strong').textContent = info.ranking;
-
         document.querySelector('.map-stats p:nth-child(3)').textContent = "IPs reported last Month: " + info.ips_last_month;
         document.querySelector('.map-stats p:nth-child(4)').textContent = "IPs reported in total: " + info.ips_total;
-
         updateIpTable(info.ips);
+    
+        if (!cardAnimated) {
+          card.classList.add('show');
+
+          card.addEventListener('animationend', function handler() {
+            countryInfo.classList.add('show');
+            card.removeEventListener('animationend', handler);
+            cardAnimated = true;
+          });
+        } else {
+          countryInfo.classList.remove('show');
+          void countryInfo.offsetWidth; 
+          countryInfo.classList.add('show');
+        }
       }
     }
   }
