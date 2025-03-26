@@ -76,7 +76,8 @@ function onMouseClick(event) {
         const countryImage = document.querySelector('.map-stats img');
         countryImage.src = info.image;
         countryImage.alt = info.name;
-        document.querySelector('.map-stats .rank strong').textContent = "Rank: " + info.ranking;
+        document.querySelector('.map-stats .rank span').textContent = "Rank: ";
+        document.querySelector('.map-stats .rank strong').textContent = info.ranking;
         document.querySelector('.map-stats p:nth-child(3)').textContent = "IPs reported last Month: " + info.ips_last_month;
         document.querySelector('.map-stats p:nth-child(4)').textContent = "IPs reported in total: " + info.ips_total;
         updateIpTable(info.ips);
