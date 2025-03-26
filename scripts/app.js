@@ -11,7 +11,7 @@ class App {
     this.initRenderer();
     this.initCamera();
     this.initControls();
-    this.initStats();
+    //this.initStats();
 
     if(this.preload) {
       await this.preload();
@@ -51,12 +51,12 @@ class App {
   }
 
   initStats = () => {
-    /*this.stats = new Stats();
+    this.stats = new Stats();
     this.stats.setMode(0);
     this.stats.domElement.style.position = 'absolute';
     this.stats.domElement.style.right = '10px';
     this.stats.domElement.style.bottom = '10px';
-    document.body.appendChild( this.stats.domElement );*/
+    document.body.appendChild( this.stats.domElement );
   }
 
   render = () => {

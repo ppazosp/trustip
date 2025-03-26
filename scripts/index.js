@@ -31,6 +31,38 @@ async function preload() {
   }
 }
 
+function onMouseClick(event) {
+  event.preventDefault();
+
+  console.log("Click event fired!");
+  
+  const container = document.querySelector('.globe');
+  const rect = container.getBoundingClientRect();
+  
+  const mouse = new THREE.Vector2();
+  mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+  mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
+
+  const raycaster = new THREE.Raycaster();
+  raycaster.setFromCamera(mouse, app.camera);
+
+  const intersects = raycaster.intersectObjects(groups.markers.children, true);
+  console.log("Intersections:", intersects);
+
+  if (intersects.length > 0) {
+    let markerObject = intersects[0].object;
+    while (markerObject.parent && markerObject.name !== 'Marker') {
+      markerObject = markerObject.parent;
+    }
+    console.log("Final marker object:", markerObject);
+    
+    const countryName = markerObject.userData.countryName;
+    if (countryName) {
+      console.log(countryName);
+      document.querySelector('.country-card h2').textContent = countryName;
+    }
+  }
+}
 
 function setup(app) {
   const container = document.querySelector('.globe');
@@ -40,7 +72,7 @@ function setup(app) {
   app.camera.aspect = width / height;
   app.camera.updateProjectionMatrix();
 
-  const controllers = [];
+  //const controllers = [];
 
   /*app.addControlGui(gui => {
     const colorFolder = gui.addFolder('Colors');
@@ -78,7 +110,7 @@ function setup(app) {
   app.camera.position.y = config.sizes.globe * 0;
   app.controls.enableDamping = true;
   app.controls.dampingFactor = 0.05;
-  app.controls.rotateSpeed = 0.07;
+  app.controls.rotateSpeed = 0.05;
 
   groups.main = new THREE.Group();
   groups.main.name = 'Main';
@@ -94,6 +126,9 @@ function setup(app) {
 
   /*const lines = new Lines();
   groups.globe.add(groups.lines);*/
+
+  container.addEventListener('click', onMouseClick, false);
+
 
   app.scene.add(groups.main);
 }
@@ -159,6 +194,8 @@ function animate(app) {
   }
 
   if(animations.rotateGlobe) {
-    groups.globe.rotation.y -= 0.0025;
+    groups.globe.rotation.y -= 0.0005;
   }
 }
+
+

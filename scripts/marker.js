@@ -17,6 +17,7 @@ class Marker {
 
     this.group = new THREE.Group();
     this.group.name = 'Marker';
+    this.group.userData.countryName = label;
 
     this.createLabel();
     this.createPoint();
@@ -48,6 +49,7 @@ class Marker {
 
   createPoint() {
     this.point = new THREE.Mesh( this.geometry, this.material );
+    
     this.point.material.color.set(this.pointColor);
     this.group.add(this.point);
     elements.markerPoint.push(this.point);
@@ -56,7 +58,7 @@ class Marker {
   createGlow() {
     this.glow = new THREE.Mesh( this.geometry, this.material.clone() );
     this.glow.material.color.set(this.glowColor);
-    this.glow.material.opacity = 0.6;
+    this.glow.material.opacity = 0.5;
     this.group.add(this.glow);
     elements.markerPoint.push(this.glow);
   }
@@ -92,8 +94,12 @@ class Marker {
     const canvas = new fabric.Canvas(element);
 
     const text = new fabric.Text(this.labelText, {
-      left: 0, top: 0, fill: this.textColor, 
-      fontFamily: 'Open Sans',
+      left: 0, 
+      top: 0, 
+      fill: this.textColor, 
+      fontFamily: 'Fira Code, monospace',
+      fontSize: 42,
+      fontWeight: 'normal'
     });
 
     canvas.add(text);
