@@ -51,6 +51,7 @@ class App {
     this.controls.maxDistance = 460;
     this.controls.enableZoom = false;
     this.controls.enableKeys = false;
+    this.controls.enablePan = false;
   }
 
   initStats = () => {

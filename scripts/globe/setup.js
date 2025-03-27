@@ -6,7 +6,6 @@ window.onresize = app.handleResize;
 const loader = new THREE.TextureLoader();
 const controls = {}
 
-
 async function preload() {
   try {
 
@@ -16,6 +15,11 @@ async function preload() {
   } catch(error) {
     console.log(error);
   }
+}
+
+function printCameraPosition() {
+  const { x, y, z } = app.camera.position;
+  console.log(`Camera Position -> x: ${x.toFixed(2)}, y: ${y.toFixed(2)}, z: ${z.toFixed(2)}`);
 }
 
 function goToCountry(info) {
@@ -143,7 +147,6 @@ function setup(app) {
 
 
 function animate(app) {
-  
   TWEEN.update();
   
   if(controls.changed) {
@@ -208,5 +211,5 @@ function animate(app) {
     groups.globe.rotation.y -= 0.0005;
   }
 
-  //printCameraPosition(); 
+  printCameraPosition(); 
 }
