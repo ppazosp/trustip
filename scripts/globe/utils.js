@@ -97,8 +97,8 @@ function printCameraPosition() {
 }
 
 function latLngToCameraPosition(latDeg, lonDeg, distance) {
-  const offsetLat = 6;      
-  const offsetTheta = 0.2;   
+  const offsetLat = 0;      
+  const offsetTheta = 0;   
   
   const phi = THREE.Math.degToRad(90 - (latDeg - offsetLat));
   
