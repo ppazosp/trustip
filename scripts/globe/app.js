@@ -1,9 +1,12 @@
 class App {
-  constructor({animate, setup, preload}) {
+  constructor({ animate, setup, preload }) {
     this.preload = preload;
     this.animate = animate;
     this.setup = setup;
     window.app = this;
+
+    this.lastTime = performance.now();
+    this.accumulator = 0;
   }
 
   init = async () => {
@@ -13,7 +16,7 @@ class App {
     this.initControls();
     //this.initStats();
 
-    if(this.preload) {
+    if (this.preload) {
       await this.preload();
     }
 
@@ -26,7 +29,7 @@ class App {
   }
 
   initRenderer = () => {
-    this.renderer = new THREE.WebGLRenderer({alpha: true});
+    this.renderer = new THREE.WebGLRenderer({ alpha: true });
     this.renderer.setClearColor(0x181818, 1.0);
     this.renderer.setSize(window.innerWidth, window.innerHeight);
     this.renderer.setPixelRatio(window.devicePixelRatio * 1.5);
@@ -42,11 +45,11 @@ class App {
   }
 
   initControls = () => {
-    this.controls = new THREE.OrbitControls(this.camera, this.renderer.domElement);  
+    this.controls = new THREE.OrbitControls(this.camera, this.renderer.domElement);
 
     this.controls.minDistance = 460;
     this.controls.maxDistance = 460;
-    this.controls.enableZoom = false; 
+    this.controls.enableZoom = false;
     this.controls.enableKeys = false;
   }
 
@@ -56,7 +59,7 @@ class App {
     this.stats.domElement.style.position = 'absolute';
     this.stats.domElement.style.right = '10px';
     this.stats.domElement.style.bottom = '10px';
-    document.body.appendChild( this.stats.domElement );
+    document.body.appendChild(this.stats.domElement);
   }
 
   render = () => {
@@ -66,7 +69,18 @@ class App {
   }
 
   update = () => {
-    this.animate(this);
+    const now = performance.now();
+    const frameTime = (now - this.lastTime) / 1000;
+    this.lastTime = now;
+
+    this.accumulator += frameTime;
+    const dt = 1 / 60
+    
+    while (this.accumulator >= dt) {
+      this.animate(this);
+      this.accumulator -= dt;
+    }
+
     //this.stats.update();
     this.controls.update();
     this.renderer.render(this.scene, this.camera);

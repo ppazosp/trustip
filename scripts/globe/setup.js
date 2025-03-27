@@ -143,6 +143,7 @@ function setup(app) {
 
 
 function animate(app) {
+  
   TWEEN.update();
   
   if(controls.changed) {
