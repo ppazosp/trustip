@@ -263,6 +263,10 @@
         display: flex;
     }
 
+    .country-placeholder {
+        display: none;
+    }
+
     .country {
         flex-direction: column;
     }

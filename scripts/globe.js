@@ -1,71 +1,114 @@
-class Globe {
-  constructor(radius) {
-    this.radius = config.sizes.globe;
-    this.geometry = new THREE.SphereGeometry(this.radius, 64, 64);
+const data = {}
+let  cardAnimated = false;
 
-    groups.globe = new THREE.Group();
-    groups.globe.name = 'Globe';
-
-    this.initGlobe();
-    
-    return groups.globe;
-  }
-
-  initGlobe() {
-    const scale = config.scale.globeScale;
-    this.globeMaterial = this.createGlobeMaterial();
-    this.globe = new THREE.Mesh( this.geometry, this.globeMaterial );
-    this.globe.scale.set(scale, scale, scale);
-    elements.globe = this.globe;
-    
-    groups.map = new THREE.Group();
-    groups.map.name = 'Map';
-
-    groups.map.add(this.globe);
-    groups.globe.add(groups.map);
-  }
-
-  initAtmosphere() {
-    this.atmosphereMaterial = this.createGlobeAtmosphere();
-    this.atmosphere = new THREE.Mesh( this.geometry, this.atmosphereMaterial )
-    this.atmosphere.scale.set(1.2, 1.2, 1.2);
-    elements.atmosphere = this.atmosphere;
-
-    groups.atmosphere = new THREE.Group();
-    groups.atmosphere.name = 'Atmosphere';
-
-    groups.atmosphere.add(this.atmosphere);
-    groups.globe.add(groups.atmosphere); 
-  }
-
-  createGlobeMaterial() {
-    const texture = loader.load('null')
-    console.log(texture)
-
-    const shaderMaterial = new THREE.ShaderMaterial({
-      uniforms: {texture: { value:  texture }},
-      vertexShader: shaders.globe.vertexShader,
-      fragmentShader: shaders.globe.fragmentShader,
-      blending: THREE.AdditiveBlending,
-      transparent: true,
-    })
-
-    const normalMaterial = new THREE.MeshBasicMaterial({
-      blending: THREE.AdditiveBlending,
-      transparent: true,
-    })
-
-    return shaderMaterial;
-  }
-
-  createGlobeAtmosphere() {
-    return new THREE.ShaderMaterial({
-      vertexShader: shaders.atmosphere.vertexShader,
-      fragmentShader: shaders.atmosphere.fragmentShader,
-      blending: THREE.AdditiveBlending,
-      side: THREE.BackSide,
-      transparent: true,
-      uniforms: {}
-    });
-  }
+function onSubmit(event) {
+    event.preventDefault();
+    const searchInput = document.querySelector('.search-form input[name="search"]');
+    const query = searchInput.value.trim();
+    if (query) {
+        selectCountry(query);
+    }
 }
+
+function onChange(event) {
+    const query = event.target.value.trim();
+    if (query) {
+        selectCountry(query);
+    }
+}
+
+function updateIpTable(ips) {
+    const tbody = document.querySelector('.ip-scroll table tbody');
+    tbody.innerHTML = "";
+    ips.forEach(entry => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+        <td>${entry.ip}</td>
+        <td>${entry.nor}</td>
+        <td>${entry.dlr}</td>
+      `;
+        tbody.appendChild(tr);
+    });
+}
+
+function selectCountry(countryName) {
+    const info = data.countries.find(c => c.name.toLowerCase() === countryName.toLowerCase());
+    if (info) {
+        console.log("Selected Country:", info.name);
+
+        const card = document.querySelector('.country-card');
+        const countryInfo = document.querySelector('.country-info');
+        const countryTitle = document.querySelector('.country-card h2');
+
+        countryTitle.textContent = info.name;
+        const countryImage = document.querySelector('.map-stats img');
+        countryImage.src = info.image;
+        countryImage.alt = info.name;
+        document.querySelector('.map-stats .rank span').textContent = "Rank: ";
+        document.querySelector('.map-stats .rank strong').textContent = info.ranking;
+        document.querySelector('.map-stats p:nth-child(3)').textContent =
+            "IPs reported last Month: " + info.ips_last_month;
+        document.querySelector('.map-stats p:nth-child(4)').textContent =
+            "IPs reported in total: " + info.ips_total;
+        updateIpTable(info.ips);
+
+        if (!cardAnimated) {
+            card.classList.add('show');
+            card.addEventListener('animationend', function handler() {
+                countryInfo.classList.add('show');
+                card.removeEventListener('animationend', handler);
+                cardAnimated = true;
+            });
+        } else {
+            countryInfo.classList.remove('show');
+            void countryInfo.offsetWidth;
+            countryInfo.classList.add('show');
+        }
+
+        // Now rotate the globe to face the selected country
+        goToCountry(info);
+
+    } else {
+        console.log("Country not found:", countryName);
+    }
+}
+
+function populateCountryDatalist() {
+    const datalist = document.getElementById("countries");
+    datalist.innerHTML = "";
+    data.countries.forEach(country => {
+        const option = document.createElement("option");
+        option.value = country.name;
+        datalist.appendChild(option);
+    });
+}
+
+async function loadCountriesData() {
+    try {
+        const response = await fetch('assets/data/countries.json');
+        data.countries = await response.json();
+        populateCountryDatalist();
+    } catch (error) {
+        console.error("Error al cargar countries.json:", error);
+    }
+}
+
+async function preload() {
+    try {
+
+        await loadCountriesData();
+
+        return true;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+preload()
+
+document.querySelector('.search-form').addEventListener('submit', onSubmit);
+
+document.querySelector('.search-form input[name="search"]').addEventListener('change', onChange);
+
+
+

@@ -91,4 +91,24 @@ function getSplineFromCoords(latitudeA, longitudeA, latitudeB, longitudeB, size)
   return {start, end, mid1, mid2};
 }
 
+function printCameraPosition() {
+  const { x, y, z } = app.camera.position;
+  console.log(`Camera Position -> x: ${x.toFixed(2)}, y: ${y.toFixed(2)}, z: ${z.toFixed(2)}`);
+}
+
+function latLngToCameraPosition(latDeg, lonDeg, distance) {
+  const offsetLat = 4;      
+  const offsetTheta = 0.07;   
+  
+  const phi = THREE.Math.degToRad(90 - (latDeg - offsetLat));
+  
+  const theta = -THREE.Math.degToRad(lonDeg) + offsetTheta;
+  
+  const x = distance * Math.sin(phi) * Math.cos(theta);
+  const y = distance * Math.cos(phi);
+  const z = distance * Math.sin(phi) * Math.sin(theta);
+  
+  return { x, y, z };
+}
+
 
