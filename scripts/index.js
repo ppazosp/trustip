@@ -40,6 +40,76 @@ async function loadCountriesData() {
   }
 }
 
+function printCameraPosition() {
+  const { x, y, z } = app.camera.position;
+  console.log(`Camera Position -> x: ${x.toFixed(2)}, y: ${y.toFixed(2)}, z: ${z.toFixed(2)}`);
+}
+
+function latLngToCartesian(latDeg, lngDeg, radius) {
+  // Convert degrees to radians
+  const lat = THREE.Math.degToRad(latDeg);
+  const lng = THREE.Math.degToRad(lngDeg);
+
+  // Using conventional spherical coordinates so that:
+  // lat = 0, lng = 0 yields (0, 0, radius) (i.e. the initial camera position).
+  const x = -radius * Math.cos(lat) * Math.sin(lng);
+  const y = radius * Math.sin(lat);
+  const z = radius * Math.cos(lat) * Math.cos(lng);
+
+  return { x, y, z };
+}
+
+function latLngToCameraPosition(latDeg, lonDeg, distance) {
+  const offsetLat = 4;      
+  const offsetTheta = 0.07;   
+  
+  const phi = THREE.Math.degToRad(90 - (latDeg - offsetLat));
+  
+  const theta = -THREE.Math.degToRad(lonDeg) + offsetTheta;
+  
+  const x = distance * Math.sin(phi) * Math.cos(theta);
+  const y = distance * Math.cos(phi);
+  const z = distance * Math.sin(phi) * Math.sin(theta);
+  
+  return { x, y, z };
+}
+
+function goToCountry(info) {
+  // Stop auto-rotation if needed.
+  animations.rotateGlobe = false;
+
+  // Get the input latitude and longitude.
+  const lat = parseFloat(info.latitude);
+  const lon = parseFloat(info.longitude);
+  
+  // Use the current camera distance so the zoom level stays the same.
+  const currentDistance = app.camera.position.length();
+  
+  // Compute the desired camera position.
+  const targetPos = latLngToCameraPosition(lat, lon, currentDistance);
+  
+  // Animate the camera position to the target.
+  const startPos = { 
+    x: app.camera.position.x,
+    y: app.camera.position.y,
+    z: app.camera.position.z
+  };
+  
+  new TWEEN.Tween(startPos)
+    .to({ x: targetPos.x, y: targetPos.y, z: targetPos.z }, 1500) // animate over 1.5s
+    .easing(TWEEN.Easing.Quadratic.Out)
+    .onUpdate(() => {
+      app.camera.position.set(startPos.x, startPos.y, startPos.z);
+      app.controls.update();
+    })
+    .start();
+  
+  // Ensure the controls always look at the globe center.
+  app.controls.target.set(0, 0, 0);
+  app.controls.update();
+}
+
+
 function selectCountry(countryName) {
   const info = data.countries.find(c => c.name.toLowerCase() === countryName.toLowerCase());
   if (info) {
@@ -55,12 +125,11 @@ function selectCountry(countryName) {
     countryImage.alt = info.name;
     document.querySelector('.map-stats .rank span').textContent = "Rank: ";
     document.querySelector('.map-stats .rank strong').textContent = info.ranking;
-    document.querySelector('.map-stats p:nth-child(3)').textContent = "IPs reported last Month: " + info.ips_last_month;
-    document.querySelector('.map-stats p:nth-child(4)').textContent = "IPs reported in total: " + info.ips_total;
+    document.querySelector('.map-stats p:nth-child(3)').textContent =
+      "IPs reported last Month: " + info.ips_last_month;
+    document.querySelector('.map-stats p:nth-child(4)').textContent =
+      "IPs reported in total: " + info.ips_total;
     updateIpTable(info.ips);
-
-    const globe = document.querySelector('.globe');
-    globe.classList.add('shifted');
 
     if (!cardAnimated) {
       card.classList.add('show');
@@ -71,9 +140,13 @@ function selectCountry(countryName) {
       });
     } else {
       countryInfo.classList.remove('show');
-      void countryInfo.offsetWidth; 
+      void countryInfo.offsetWidth;
       countryInfo.classList.add('show');
     }
+
+    // Now rotate the globe to face the selected country
+    goToCountry(info);
+
   } else {
     console.log("Country not found:", countryName);
   }
@@ -209,6 +282,8 @@ function setup(app) {
 
 
 function animate(app) {
+  TWEEN.update();
+  
   if(controls.changed) {
     if(elements.globePoints) {
       elements.globePoints.material.size = config.sizes.globeDotSize;
@@ -270,6 +345,6 @@ function animate(app) {
   if(animations.rotateGlobe) {
     groups.globe.rotation.y -= 0.0005;
   }
+
+  //printCameraPosition(); 
 }
-
-

@@ -41,7 +41,7 @@ class Marker {
     this.label = new THREE.Sprite(material);
     this.label.scale.set( 40, 20, 1 );
     this.label.center.x = 0.25;
-    this.label.translateY(2);
+    this.label.translateY(4);
 
     this.group.add(this.label);
     elements.markerLabel.push(this.label);
@@ -99,7 +99,7 @@ class Marker {
       fill: this.textColor, 
       fontFamily: 'Fira Code, monospace',
       fontSize: 42,
-      fontWeight: 'normal'
+      fontWeight: 'normal',
     });
 
     canvas.add(text);
