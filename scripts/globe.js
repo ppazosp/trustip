@@ -1,21 +1,5 @@
-const data = {}
+const data = {};
 let  cardAnimated = false;
-
-function onSubmit(event) {
-    event.preventDefault();
-    const searchInput = document.querySelector('.search-form input[name="search"]');
-    const query = searchInput.value.trim();
-    if (query) {
-        selectCountry(query);
-    }
-}
-
-function onChange(event) {
-    const query = event.target.value.trim();
-    if (query) {
-        selectCountry(query);
-    }
-}
 
 function updateIpTable(ips) {
     const tbody = document.querySelector('.ip-scroll table tbody');
@@ -65,8 +49,8 @@ function selectCountry(countryName) {
             countryInfo.classList.add('show');
         }
 
-        // Now rotate the globe to face the selected country
         goToCountry(info);
+        document.querySelector('.search-form input[name="search"]').blur();
 
     } else {
         console.log("Country not found:", countryName);
@@ -104,11 +88,49 @@ async function preload() {
     }
 }
 
+
 preload()
 
-document.querySelector('.search-form').addEventListener('submit', onSubmit);
+const searchForm = document.querySelector('.search-form');
+searchForm.addEventListener('submit', function(event) {
+    event.preventDefault();
+    const searchInput = document.querySelector('.search-form input[name="search"]');
+    const query = searchInput.value.trim();
+    if (query) {
+        selectCountry(query);
+    }
+});
 
-document.querySelector('.search-form input[name="search"]').addEventListener('change', onChange);
+const searchInput = document.querySelector('.search-form input[name="search"]');
+searchInput.addEventListener('change', function(event) {
+    const query = event.target.value.trim();
+    if (query) {
+        selectCountry(query);
+    }
+});
+searchInput.addEventListener('keydown', function(event) {
+  if (event.key === 'Tab') {
+    event.preventDefault();
+    const currentText = this.value.trim().toLowerCase();
+    const datalist = document.getElementById("countries");
+    let candidate = null;
+    if (datalist) {
+      for (let i = 0; i < datalist.options.length; i++) {
+        const optionValue = datalist.options[i].value;
+        if (optionValue.toLowerCase().startsWith(currentText)) {
+          candidate = optionValue;
+          break;
+        }
+      }
+    }
+    if (candidate) {
+      this.value = candidate;
+    }
+  } else if (event.key === 'Enter') {
+    event.preventDefault();
+    selectCountry(this.value.trim());
+  }
+});
 
 
 
