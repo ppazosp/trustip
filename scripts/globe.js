@@ -1,6 +1,48 @@
 const data = {};
 let  cardAnimated = false;
 
+const scriptUrls = [
+    "https://cdnjs.cloudflare.com/ajax/libs/three.js/106/three.min.js",
+    "https://cdnjs.cloudflare.com/ajax/libs/stats.js/r16/Stats.min.js",
+    "https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.7.6/dat.gui.min.js",
+    "https://cdnjs.cloudflare.com/ajax/libs/tween.js/17.4.0/Tween.min.js",
+    "https://cdnjs.cloudflare.com/ajax/libs/fabric.js/3.3.2/fabric.min.js",
+    "https://cdnjs.cloudflare.com/ajax/libs/chroma-js/2.0.4/chroma.min.js",
+    "libs/THREE.MeshLine.js",
+    "https://d3js.org/d3-array.v1.min.js",
+    "https://d3js.org/d3-geo.v1.min.js",
+    "libs/orbit-controls.js",
+    "libs/trackball-controls.js",
+    "libs/perlin-noise.js",
+    "assets/data/processing.js",
+    "scripts/globe/config.js",
+    "scripts/globe/shaders.js",
+    "scripts/globe/app.js",
+    "scripts/globe/setup.js",
+    "assets/data/grid.js",
+    "scripts/globe/globe.js",
+    "scripts/globe/points.js",
+    "scripts/globe/marker.js",
+    "scripts/globe/markers.js",
+    "scripts/globe/lines.js",
+    "scripts/globe/dots.js",
+    "scripts/globe/utils.js"
+];
+
+function loadScriptsSequentially(urls, callback) {
+    if (!urls || urls.length === 0) {
+      if (callback) callback();
+      return;
+    }
+    const script = document.createElement('script');
+    script.src = urls.shift();
+    script.defer = true;
+    script.onload = function() {
+      loadScriptsSequentially(urls, callback);
+    };
+    document.body.appendChild(script);
+}
+
 function updateIpTable(ips) {
     const tbody = document.querySelector('.ip-scroll table tbody');
     tbody.innerHTML = "";
@@ -132,5 +174,7 @@ searchInput.addEventListener('keydown', function(event) {
   }
 });
 
-
+if (window.innerWidth > 600) {
+loadScriptsSequentially(scriptUrls);
+}
 
