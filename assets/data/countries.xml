@@ -1,0 +1,162 @@
+<countries>
+  <country>
+    <name>USA</name>
+    <region>North America</region>
+    <total>431</total>
+    <time>0 days</time>
+    <last>23-03-2025</last>
+    <trend>+14%</trend>
+  </country>
+  <country>
+    <name>China</name>
+    <region>Asia</region>
+    <total>398</total>
+    <time>0 days</time>
+    <last>23-03-2025</last>
+    <trend>+11%</trend>
+  </country>
+  <country>
+    <name>India</name>
+    <region>Asia</region>
+    <total>317</total>
+    <time>0 days</time>
+    <last>23-03-2025</last>
+    <trend>+9%</trend>
+  </country>
+  <country>
+    <name>Japan</name>
+    <region>Asia</region>
+    <total>256</total>
+    <time>0 days</time>
+    <last>23-03-2025</last>
+    <trend>+6%</trend>
+  </country>
+  <country>
+    <name>Spain</name>
+    <region>Europe</region>
+    <total>223</total>
+    <time>2 days</time>
+    <last>22-03-2025</last>
+    <trend>+12%</trend>
+  </country>
+  <country>
+    <name>Russia</name>
+    <region>Europe/Asia</region>
+    <total>211</total>
+    <time>0 days</time>
+    <last>23-03-2025</last>
+    <trend>+7%</trend>
+  </country>
+  <country>
+    <name>Germany</name>
+    <region>Europe</region>
+    <total>183</total>
+    <time>3 days</time>
+    <last>20-03-2025</last>
+    <trend>-4%</trend>
+  </country>
+  <country>
+    <name>Brazil</name>
+    <region>South America</region>
+    <total>189</total>
+    <time>0 days</time>
+    <last>23-03-2025</last>
+    <trend>+9%</trend>
+  </country>
+  <country>
+    <name>France</name>
+    <region>Europe</region>
+    <total>197</total>
+    <time>0 days</time>
+    <last>23-03-2025</last>
+    <trend>+8%</trend>
+  </country>
+  <country>
+    <name>Italy</name>
+    <region>Europe</region>
+    <total>168</total>
+    <time>1 days</time>
+    <last>22-03-2025</last>
+    <trend>+6%</trend>
+  </country>
+  <country>
+    <name>UK</name>
+    <region>Europe</region>
+    <total>162</total>
+    <time>1 days</time>
+    <last>22-03-2025</last>
+    <trend>+4%</trend>
+  </country>
+  <country>
+    <name>Australia</name>
+    <region>Oceania</region>
+    <total>142</total>
+    <time>3 days</time>
+    <last>20-03-2025</last>
+    <trend>-2%</trend>
+  </country>
+  <country>
+    <name>Portugal</name>
+    <region>Europe</region>
+    <total>145</total>
+    <time>5 days</time>
+    <last>18-03-2025</last>
+    <trend>-2%</trend>
+  </country>
+  <country>
+    <name>Canada</name>
+    <region>North America</region>
+    <total>122</total>
+    <time>2 days</time>
+    <last>21-03-2025</last>
+    <trend>+3%</trend>
+  </country>
+  <country>
+    <name>Netherlands</name>
+    <region>Europe</region>
+    <total>108</total>
+    <time>2 days</time>
+    <last>21-03-2025</last>
+    <trend>+3%</trend>
+  </country>
+  <country>
+    <name>Mexico</name>
+    <region>North America</region>
+    <total>98</total>
+    <time>4 days</time>
+    <last>19-03-2025</last>
+    <trend>-1%</trend>
+  </country>
+  <country>
+    <name>Egypt</name>
+    <region>Africa</region>
+    <total>81</total>
+    <time>3 days</time>
+    <last>20-03-2025</last>
+    <trend>+1%</trend>
+  </country>
+  <country>
+    <name>South Africa</name>
+    <region>Africa</region>
+    <total>77</total>
+    <time>5 days</time>
+    <last>18-03-2025</last>
+    <trend>-4%</trend>
+  </country>
+  <country>
+    <name>Argentina</name>
+    <region>South America</region>
+    <total>87</total>
+    <time>7 days</time>
+    <last>16-03-2025</last>
+    <trend>-6%</trend>
+  </country>
+  <country>
+    <name>New Zealand</name>
+    <region>Oceania</region>
+    <total>67</total>
+    <time>4 days</time>
+    <last>19-03-2025</last>
+    <trend>-1%</trend>
+  </country>
+</countries>
