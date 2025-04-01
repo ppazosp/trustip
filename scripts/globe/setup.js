@@ -208,7 +208,7 @@ function animate(app) {
   }
 
   if(animations.rotateGlobe) {
-    groups.globe.rotation.y -= 0.0005;
+    rotateCameraAroundGlobe();
   }
 
   printCameraPosition(); 

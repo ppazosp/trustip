@@ -111,4 +111,22 @@ function latLngToCameraPosition(latDeg, lonDeg, distance) {
   return { x, y, z };
 }
 
+function rotateCameraAroundGlobe(angleIncrement = 0.001) {
+  if (!app || !app.camera) {
+    console.warn("Camera or app is not defined.");
+    return;
+  }
 
+  // Convert current camera position to spherical coordinates
+  const spherical = new THREE.Spherical();
+  spherical.setFromVector3(app.camera.position);
+
+  // Rotate just the azimuthal angle (horizontal)
+  spherical.theta += angleIncrement;
+
+  // Convert back to Cartesian coordinates
+  const newPosition = new THREE.Vector3().setFromSpherical(spherical);
+  app.camera.position.copy(newPosition);
+
+  app.camera.lookAt(0, 0, 0);
+}
