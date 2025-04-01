@@ -1,4 +1,5 @@
-// 1. Acceso por querySelector
+window.addEventListener('DOMContentLoaded', () => {
+    // 1. Acceso por querySelector
 const form = document.querySelector("form");
 
 // 2. Acceso por getElementsByClassName
@@ -53,8 +54,8 @@ function addEventListeners() {
     // Validación al enviar el formulario en modo signup
   form.addEventListener("submit", (e) => {
     const email = form.querySelector('input[name="email"]');
-    const username = form.querySelector('input[name="username"]');
-    const password = form.querySelector('input[name="password"]');
+    const username = form.getElementsByName("username")[0];
+    const password = form.getElementsByTagName("input")[2]; 
     const confirmPassword = form.querySelector('input[name="confirmPassword"]');
   
     // Si no estamos en el formulario de signup, no validamos
@@ -98,3 +99,5 @@ function addEventListeners() {
 
 // Inicializar eventos en primera carga
 addEventListeners();
+
+});
