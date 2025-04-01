@@ -45,13 +45,14 @@
 
             <main>
                 <div class="elevated-card title-card">
+                    <script src="scripts/contributors.js"></script>
                     <h1>Report IP Address</h1>
                 </div>
 
                 <div class="elevated-card content-card">
                     <form class="report-form-fields" action="globe.html" method="get">
                             <input type="text" name="ip" placeholder="Enter IP address..." required>
-                            <select name="category" required>
+                            <select name="category" id="category-select" required>
                                 <option value="">...</option>
                                 <option value="phishing">Phishing</option>
                                 <option value="malware">Malware</option>
@@ -81,5 +82,6 @@
                 </nav>
             </footer>
 
+            
         </body>
 </html>
