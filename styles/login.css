@@ -93,6 +93,17 @@
   background-color: var(--light-yellow);
 }
 
+.fade-out {
+  opacity: 0;
+  transition: opacity 0.4s ease-out;
+}
+
+.fade-in {
+  opacity: 1;
+  transition: opacity 0.4s ease-in;
+}
+  
+
 @media screen and (max-width: 600px) {
   .login-container{
     flex-direction: column;
