@@ -95,14 +95,16 @@
 
 .fade-out {
   opacity: 0;
-  transition: opacity 0.4s ease-out;
+  transform: scale(0.5);
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
 }
 
 .fade-in {
   opacity: 1;
-  transition: opacity 0.4s ease-in;
+  transform: scale(1);
+  transition: opacity 0.5s ease-in, transform 0.5s ease-in;
 }
-  
+
 
 @media screen and (max-width: 600px) {
   .login-container{

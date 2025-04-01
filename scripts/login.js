@@ -1,14 +1,11 @@
 window.addEventListener('DOMContentLoaded', () => {
-    // 1. Acceso por querySelector
+    
 const form = document.querySelector("form");
 
-// 2. Acceso por getElementsByClassName
-const loginButton = document.getElementsByClassName("login")[0];
 
-
-// Crear formulario de signup dinámicamente
 const createSignupForm = () => {
-    form.classList.add("fade-out");
+    const formParent = form.parentElement;
+    formParent.classList.add("fade-out");
   
     setTimeout(() => {
       form.innerHTML = `
@@ -21,24 +18,21 @@ const createSignupForm = () => {
         </div>
       `;
   
-      form.classList.remove("fade-out");
-      form.classList.add("fade-in");
+      formParent.classList.remove("fade-out");
+      formParent.classList.add("fade-in");
   
-      addEventListeners(); // Reasigna eventos
-    }, 400); // Duración de la animación
+      addEventListeners();
+    }, 400);
   };
   
 
 // 1. Evento click
 function addEventListeners() {
-  const loginBtn = document.querySelector(".login");
+  const loginBtn = document.getElementsByClassName("login")[0];
   const signupBtn = document.getElementsByClassName("button signup")[0];
-
-
 
   if (signupBtn.type === "button") {
     signupBtn.addEventListener("click", createSignupForm);
-    
   }
 
   const allInputs = document.querySelectorAll("input");
