@@ -84,11 +84,16 @@ header nav, footer nav {
     align-items: center;
 }
 
-.left-nav, .right-nav, .left-footer, .right-footer {
+.left-nav, .right-nav {
     list-style: none;
     display: flex;
     gap: 2vw;
     height: 36px;
+}
+
+.left-footer, .right-footer{
+    list-style: none;
+    height: 20px;
 }
 
 .right-nav, .right-footer {
