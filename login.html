@@ -13,15 +13,15 @@
         <link rel="stylesheet" href="styles/login.css">
     </head>
     <body>
-        <header>
-            <nav>
-                <ul class="left-nav">
+        <header class="d-flex pt-4 pb-3">
+            <nav class="d-flex align-items-center justify-content-between">
+                <ul class="left-nav d-flex px-0 mt-2">
                     <li>
                         <a href="index.html">
-                            <img class="img" src="assets/icons/logo_bg.png" alt="trustip" width="104" height="32">
+                            <img class="img selected" src="assets/icons/logo_bg.png" alt="trustip" width="104" height="32">
                         </a>
                     </li>
-                    <li>
+                    <li >
                         <a href="globe.html">
                             <img class="img" src="assets/icons/globe.png" alt="Globe" width="32" height="32">
                         </a>
@@ -32,7 +32,7 @@
                         </a>
                     </li>
                 </ul>
-                <ul class="right-nav">
+                <ul class="right-nav ms-auto d-flex px-0 mt-2">
                     <li>
                         <a href="contributors.html">
                             <img class="img" src="assets/icons/warning.png" alt="Contribute" width="32" height="32">
@@ -40,7 +40,7 @@
                     </li>
                     <li>
                         <a href="login.html">
-                            <img class="img selected" src="assets/icons/user.png" alt="User" width="32" height="32">
+                            <img class="img" src="assets/icons/user.png" alt="User" width="32" height="32">
                         </a>
                     </li>
                 </ul>
@@ -53,48 +53,47 @@
                     <img src="assets/icons/logo.png" alt="trustip" width="520" height="160">
                 </figure>
             </section>
-           
-            <section class="login-box">
-              <div class="card">
+            
+            <section class="login-box d-flex align-items-center">
+              <div class="card mx-auto">
                 <h2>Welcome</h2>
                 <form action="globe.html" method="get">
-                    <div class="form-section">
-                        <input type="text" name="username" placeholder="Username..." required>
-                        <input type="password" name="password" placeholder="Password..." required>
-
-                        <div class="form-section extra-section">
-                            <input type="password" placeholder="Repeat password..." />
-                            <input type="email" placeholder="Email" />
-                        </div>
+                  <div class="form-section">
+                    <input type="text" name="username" placeholder="Username..." required>
+                    <input type="password" name="password" placeholder="Password..." required>
+                    <div class="form-section extra-section">
+                      <input type="password" placeholder="Repeat password..." />
+                      <input type="email" placeholder="Email" />
                     </div>
-
-                    <div class="button-row">
-                        <div>
-                            <button class="button login" type="submit">Login</button>
-                        </div>
-                        <div>
-                            <button class="button signup" type="button">Signup</button>
-                        </div>
+                  </div>
+                  <div class="button-row">
+                    <div>
+                      <button class="button login" type="submit">Login</button>
                     </div>
+                    <div>
+                      <button class="button signup" type="button">Signup</button>
+                    </div>
+                  </div>
                 </form>
               </div>
             </section>
           </main>
+          
 
-            <footer>
-                <nav>
-                    <ul class="left-footer">
-                        <li>
-                            <a href="https://www.usc.gal/gl">Contacto</a>
-                        </li>
-                    </ul>
-                    <ul class="right-footer">
-                        <li>
-                            <a href="https://www.usc.gal/gl">©trustip</a>
-                        </li>
-                    </ul>
-                </nav>
-            </footer>
+          <footer class="d-flex my-0 pb-2 pt-1 ">
+            <nav class="d-flex align-items-center justify-content-between my-0 py-0">
+                <ul class="left-footer d-flex px-0 my-0 py-0">
+                    <li>
+                        <a href="https://www.usc.gal/gl">Contacto</a>
+                    </li>
+                </ul>
+                <ul class="right-footer ms-auto d-flex px-0 my-0 py-0">
+                    <li>
+                        <a href="https://www.usc.gal/gl">©trustip</a>
+                    </li>
+                </ul>
+            </nav>
+        </footer>
         
         <script src="scripts/login.js"></script>
 

@@ -16,7 +16,7 @@
 .logo-section img {
   height: auto;
   object-fit: contain;
-  width: 70%;
+  width: 60%;
 }
 
 
@@ -71,7 +71,9 @@
   margin-top: 8px;
   display: flex;
   justify-content: space-between;
-  gap: 32px;
+  flex-wrap: inherit;
+  gap: 5%;
+  max-width: 100%;
 }
 
 .button.login {
@@ -106,13 +108,13 @@
 }
 
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 1200px) {
   .login-container{
     flex-direction: column;
   }
 
   .logo-section img{
-    width: 90%;
+    width: 80%;
   }
 
   .card{
