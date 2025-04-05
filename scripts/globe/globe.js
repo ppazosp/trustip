@@ -39,6 +39,7 @@ class Globe {
   }
 
   createGlobeMaterial() {
+    //const texture = loader.load(config.urls.globeTexture);
     const texture = null;
 
     const shaderMaterial = new THREE.ShaderMaterial({

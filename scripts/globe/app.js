@@ -1,6 +1,5 @@
 class App {
-  constructor({ animate, setup, preload }) {
-    this.preload = preload;
+  constructor({ animate, setup }) {
     this.animate = animate;
     this.setup = setup;
     window.app = this;
@@ -14,11 +13,6 @@ class App {
     this.initRenderer();
     this.initCamera();
     this.initControls();
-    //this.initStats();
-
-    if (this.preload) {
-      await this.preload();
-    }
 
     this.render();
     this.update();
@@ -54,15 +48,6 @@ class App {
     this.controls.enablePan = false;
   }
 
-  initStats = () => {
-    this.stats = new Stats();
-    this.stats.setMode(0);
-    this.stats.domElement.style.position = 'absolute';
-    this.stats.domElement.style.right = '10px';
-    this.stats.domElement.style.bottom = '10px';
-    document.body.appendChild(this.stats.domElement);
-  }
-
   render = () => {
     this.setup(this);
     this.container = document.querySelector('.globe');
@@ -82,23 +67,19 @@ class App {
       this.accumulator -= dt;
     }
 
-    //this.stats.update();
     this.controls.update();
     this.renderer.render(this.scene, this.camera);
     requestAnimationFrame(this.update);
   }
 
-  addControlGui = callback => {
-    var gui = new dat.GUI();
-    callback(gui);
-  }
-
   handleResize = () => {
-    this.camera.aspect = window.innerWidth / window.innerHeight;
-    this.camera.updateProjectionMatrix();
     const container = document.querySelector('.globe');
     const width = container.clientWidth;
     const height = container.clientHeight;
+  
+    this.camera.aspect = width / height;
+    this.camera.updateProjectionMatrix();
+  
     this.renderer.setSize(width, height);
   }
 }

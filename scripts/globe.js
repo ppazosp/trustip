@@ -24,8 +24,6 @@ const scriptUrls = [
     "scripts/globe/points.js",
     "scripts/globe/marker.js",
     "scripts/globe/markers.js",
-    "scripts/globe/lines.js",
-    "scripts/globe/dots.js",
     "scripts/globe/utils.js"
 ];
 
@@ -115,15 +113,13 @@ async function loadCountriesData() {
         data.countries = await response.json();
         populateCountryDatalist();
     } catch (error) {
-        console.error("Error al cargar countries.json:", error);
+        console.error("Error loading countries.json:", error);
     }
 }
 
 async function preload() {
     try {
-
         await loadCountriesData();
-
         return true;
     } catch (error) {
         console.log(error);
@@ -150,6 +146,7 @@ searchInput.addEventListener('change', function(event) {
         selectCountry(query);
     }
 });
+
 searchInput.addEventListener('keydown', function(event) {
   if (event.key === 'Tab') {
     event.preventDefault();

@@ -1,26 +1,9 @@
-const app = new App({ setup, animate, preload });
-
+const app = new App({ setup, animate });
 window.onload = app.init;
 window.onresize = app.handleResize;
 
 const loader = new THREE.TextureLoader();
 const controls = {}
-
-async function preload() {
-  try {
-
-    await loadCountriesData();
-
-    return true;
-  } catch(error) {
-    console.log(error);
-  }
-}
-
-function printCameraPosition() {
-  const { x, y, z } = app.camera.position;
-  console.log(`Camera Position -> x: ${x.toFixed(2)}, y: ${y.toFixed(2)}, z: ${z.toFixed(2)}`);
-}
 
 function goToCountry(info) {
   animations.rotateGlobe = false;
@@ -81,46 +64,13 @@ function setup(app) {
   const container = document.querySelector('.globe');
   const width = container.clientWidth;
   const height = container.clientHeight;
+
   app.renderer.setSize(width, height);
   app.camera.aspect = width / height;
   app.camera.updateProjectionMatrix();
 
-  //const controllers = [];
-
-  /*app.addControlGui(gui => {
-    const colorFolder = gui.addFolder('Colors');
-    controllers.push(colorFolder.addColor(config.colors, 'globeDotColor'))
-    controllers.push(colorFolder.addColor(config.colors, 'globeMarkerColor'))
-    controllers.push(colorFolder.addColor(config.colors, 'globeMarkerGlow'))
-    controllers.push(colorFolder.addColor(config.colors, 'globeLines'))
-    controllers.push(colorFolder.addColor(config.colors, 'globeLinesDots'))
-    
-    const sizeFolder = gui.addFolder('Sizes')
-    controllers.push(sizeFolder.add(config.sizes, 'globeDotSize', 1, 5))
-    controllers.push(sizeFolder.add(config.scale, 'globeScale', 0.1, 1))
-    
-    const displayFolder = gui.addFolder('Display');
-    controllers.push(displayFolder.add(config.display, 'map'))
-    controllers.push(displayFolder.add(config.display, 'points'))
-    controllers.push(displayFolder.add(config.display, 'markers'))
-    controllers.push(displayFolder.add(config.display, 'markerLabel'))
-    controllers.push(displayFolder.add(config.display, 'markerPoint'))
-    
-    const animationsFolder = gui.addFolder('Animations');
-    controllers.push(animationsFolder.add(animations, 'rotateGlobe'))
-
-    
-    sizeFolder.open();
-  });
-
-  controllers.forEach(controller => {
-    controller.onChange((event) => {
-      controls.changed = true;
-    })
-  })*/
-
-  app.camera.position.z = config.sizes.globe * 2.85;
-  app.camera.position.y = config.sizes.globe * 0;
+  app.camera.position.z = config.sizes.globe;
+  app.camera.position.y = 0;
   app.controls.enableDamping = true;
   app.controls.dampingFactor = 0.05;
   app.controls.rotateSpeed = 0.05;
@@ -136,9 +86,6 @@ function setup(app) {
 
   const markers = new Markers(data.countries);
   groups.globe.add(groups.markers);
-
-  /*const lines = new Lines();
-  groups.globe.add(groups.lines);*/
 
   container.addEventListener('click', onMouseClick, false);
   
@@ -211,5 +158,4 @@ function animate(app) {
     rotateCameraAroundGlobe();
   }
 
-  printCameraPosition(); 
 }

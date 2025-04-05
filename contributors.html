@@ -4,7 +4,7 @@
         <title>Contributors</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        
+
         <meta name="author" content="Pablo Pazos Parada, David Manuel Raposerias Canabal">
         <meta name="description" content="trusip, mundial leader in malicious IP localization">
         <meta name="keywords" content="IP, cibersecurity, report, phishing, malware, botnets">
@@ -48,27 +48,30 @@
             </header>
 
             <main>
-                <div class="elevated-card title-card">
+                <section>
                     <script src="scripts/contributors.js"></script>
-                    <h1>Report IP Address</h1>
-                </div>
 
-                <div class="elevated-card content-card">
-                    <form class="report-form-fields" action="globe.html" method="get">
-                            <input type="text" name="ip" placeholder="Enter IP address..." required>
-                            <select name="category" id="category-select" required>
-                                <option value="">...</option>
-                                <option value="phishing">Phishing</option>
-                                <option value="malware">Malware</option>
-                                <option value="spam">Spam</option>
-                                <option value="botnet">Botnet</option>
-                            </select>
-                            <textarea name="description" placeholder="Describe the situation..." rows="5" required></textarea>
-                            <div class="form-button">
-                                <button class="button report">Report</button>
-                            </div>
-                    </form>
-                </div>
+                    <h1 class="elevated-card title-card">
+                        Report IP Address
+                    </h1>
+
+                    <div class="elevated-card content-card">
+                        <form class="report-form-fields" action="globe.html" method="get">
+                                <input type="text" name="ip" placeholder="Enter IP address..." required>
+                                <select name="category" id="category-select" required>
+                                    <option value="">...</option>
+                                    <option value="phishing">Phishing</option>
+                                    <option value="malware">Malware</option>
+                                    <option value="spam">Spam</option>
+                                    <option value="botnet">Botnet</option>
+                                </select>
+                                <textarea name="description" placeholder="Describe the situation..." rows="5" required></textarea>
+                                <div class="form-button">
+                                    <button class="button report">Report</button>
+                                </div>
+                        </form>
+                    </div>
+                </section>
             </main>
 
             <footer>
