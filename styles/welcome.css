@@ -31,7 +31,11 @@ main{
     margin: 0 auto 8px;
 }
 
-.user-card .email {
+.user-card .email,
+.user-card .email:link,
+.user-card .email:visited,
+.user-card .email:hover,
+.user-card .email:active {
     color: #ccc;
     font-size: 14px;
     display: block;
