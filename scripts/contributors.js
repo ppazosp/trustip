@@ -26,7 +26,7 @@ window.addEventListener('DOMContentLoaded', function () {
     descriptionArea.addEventListener('blur', function () {
         descriptionArea.style.outline = ''; 
     });
-  
+    
     
     reportButton.addEventListener('click', function (e) {
       var ip = ipInput.value.trim();
@@ -37,7 +37,7 @@ window.addEventListener('DOMContentLoaded', function () {
       var ipRegex = /^(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}$/;
   
       if (!ipRegex.test(ip) || category === "" || description === "") {
-        e.preventDefault(); // Evita que se envíe el formulario
+        e.preventDefault(); 
         alert("Por favor, completa todos los campos y asegúrate de que la IP es válida.");
       }
     });
