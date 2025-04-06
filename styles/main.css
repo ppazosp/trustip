@@ -10,39 +10,25 @@ html,body{
     height: 100%;
 }
 
-.img {
-    padding: 2px;
-    opacity: 0.6;
-    transition: opacity 0.3s ease-in-out;
-}
-
-.img.selected {
-    opacity: 1;
-}
-  
-.img:hover {
-    opacity: 1;
-}
-
 :root {
     --primary-color: #123d15;
     --secondary-color: #3d3d12;
     --background-dark: #1E1E1E;
     --background-light: #aaa;
+    --background-general: #181818;
     --text-light: #ffffff;
-
-    --light-red: rgb(187, 102, 102);
-    --dark-red: rgb(61, 23, 18);
-
+    --dark-red: #3d1712;
+    --dark-green: #1A5D2B;
     --light-green: #66BB6A;
-
     --light-yellow: #B5BB66;
+    --light-red: #bb6666;
 }
 
 body {
     font-family: Arial, sans-serif;
-    background-color: #181818;
-    color: white;
+    background-color: 
+        var(--background-general);
+    color: var(--text-light);
     text-align: center;
     padding-top: 72px; 
     padding-bottom: 72px; 
@@ -50,7 +36,8 @@ body {
 
 
 header, footer {
-    background-color: #1E1E1E;
+    background-color: 
+        var(--background-dark);
     padding: 20px 20px;
     display: flex;
     align-items: center;
@@ -61,19 +48,13 @@ header, footer {
     z-index: 1000;
 }
 
-header ul li:not(:last-child),
-footer ul li:not(:last-child) {
-    border-right: 2px solid #123D15; 
-    padding-right: 2vw;
-}
-
 header {
-    border-bottom: 2px solid #123D15;
+    border-bottom: 2px solid var(--primary-color);
     top: 0;
 }
 
 footer {
-    border-top: 2px solid #123D15;
+    border-top: 2px solid var(--primary-color);
     bottom: 0;
 }
 
@@ -84,7 +65,7 @@ header nav, footer nav {
     align-items: center;
 }
 
-.left-nav, .right-nav {
+.left-header, .right-header {
     list-style: none;
     display: flex;
     gap: 2vw;
@@ -96,18 +77,25 @@ header nav, footer nav {
     height: 20px;
 }
 
-.right-nav, .right-footer {
+.right-header, .right-footer {
     margin-left: auto;
 }
 
 header ul li a img {
     height: 32px;
     width: auto;
+    padding: 2px;
+    opacity: 0.6;
+    transition: opacity 0.3s ease-in-out;
+}
+
+header ul li a img.selected, header ul li a img:hover {
+    opacity: 1;
 }
 
 footer ul li a {
     text-decoration: none;
-    color: white;
+    color: var(--text-light);
     font-size: 14px;
     opacity: 0.8;
     transition: opacity 0.3s ease-in-out;
@@ -117,6 +105,11 @@ footer ul li a:hover {
     opacity: 1;
 }
 
+header ul li:not(:last-child),
+footer ul li:not(:last-child) {
+    border-right: 2px solid var(--primary-color); 
+    padding-right: 2vw;
+}
 
 main {
     display: flex;
@@ -127,13 +120,10 @@ main {
 
 .button {
     margin-top: 10px;
-}
-
-.button {
     text-decoration: none;
     font-size: 18px;
     font-weight: bold;
-    color: white;
+    color: var(--text-light);
     padding: 10px 32px;
     border-radius: 24px;
     display: inline-block;
@@ -143,16 +133,17 @@ main {
 }
 
 .button :hover {
-    background-color: #1A5D2B;
     transform: scale(1.05);
 }
 
 
 .elevated-card {
-    background-color: #1E1E1E;
+    background-color: 
+            var(--background-dark);
     padding: 16px 24px;
     border-radius: 16px;
-    box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.4);
+    box-shadow: 6px 6px 12px 
+            rgba(0, 0, 0, 0.4);
     text-align: center;
     width: fit-content;
     margin: 16px auto;
@@ -183,25 +174,20 @@ main {
 }
 
 @media screen and (max-width: 600px){
-
     .content-card{
         max-width: 100%;
     }
-
     html,body{
         overflow: scroll;
         padding-right: 8px;
         padding-left: 8px;
     }
-
     main{
         gap: 0px;
     }
-
     .elevated-card{
         margin: 0;
-    }
-    
+    }   
 }
 
 
