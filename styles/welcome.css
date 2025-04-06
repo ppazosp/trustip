@@ -68,11 +68,6 @@ main{
         column-count: 1;
     }
 
-    .list-card{
-        flex-direction: column;
-
-    }
-
     .elevated-card{
         width: 100%;
     }

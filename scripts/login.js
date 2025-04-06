@@ -4,32 +4,52 @@ window.addEventListener('DOMContentLoaded', () => {
   const signupBtn = document.querySelector(".button.signup");
   const loginBtn = document.querySelector(".button.login");
 
-  
-
-  //si existe la clase expanded, se añade el evento al botón de login
-  if (card.classList.contains("expanded")) {
-    loginBtn.addEventListener("click", () => {
-      signupBtn.type = "button"; 
-      loginBtn.type = "submit";
-      console.log("loginBtn clicked");
+  loginBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    if (card.classList.contains("expanded")) {
+      // If in signup mode, collapse the form to switch to login mode.
       card.classList.remove("expanded");
-    });
+      console.log("loginBtn clicked: collapsing form (switching to login mode)");
+    } else {
+      // In login mode, validate login fields and process login.
+      const username = form.querySelector('input[name="username"]');               
+      const password = form.querySelector('input[name="password"]');                  
+      
+      let valid = true;
+      let errorMessage = "";
+      
+      if (username.value.trim().length < 4) {
+        valid = false;
+        errorMessage += "- El nombre de usuario debe tener al menos 4 caracteres.\n";
+      }
+      if (password.value.trim().length < 4) {
+        valid = false;
+        errorMessage += "- La contraseña debe tener al menos 4 caracteres.\n";
+      }
+      
+      if (!valid) {
+        alert(`Errores en el formulario:\n\n${errorMessage}`);
+      } else {
+        console.log("Login submit triggered");
+        form.requestSubmit();
+      }
+    }
+  });
 
-    signupBtn.addEventListener("submit",() => {
+  // Signup button click handler.
+  signupBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    if (card.classList.contains("expanded")) {
+      // If already in signup mode, validate signup fields and process signup.
       const email = form.querySelector('input[name="email"]');                 
       const username = form.querySelector('input[name="username"]');               
       const password = form.querySelector('input[name="password"]');                   
       const confirmPassword = form.querySelector('input[name="confirmPassword"]');
-  
-      console.log(email.value, username.value, password.value, confirmPassword.value);
-  
-      if (!email || !confirmPassword) return;
-  
+      
       let valid = true;
       let errorMessage = "";
-  
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  
+      
       if (!emailRegex.test(email.value.trim())) {
         valid = false;
         errorMessage += "- Introduce un email válido.\n";
@@ -46,30 +66,22 @@ window.addEventListener('DOMContentLoaded', () => {
         valid = false;
         errorMessage += "- Las contraseñas no coinciden.\n";
       }
-  
+      
       if (!valid) {
-        e.preventDefault();
         alert(`Errores en el formulario:\n\n${errorMessage}`);
+      } else {
+        console.log("Signup submit triggered");
+        // Place your custom signup processing code here.
+        form.requestSubmit();
       }
-    });
-
-    
-  } else {
-    signupBtn.addEventListener("click", () => {
-      loginBtn.type = "button"; 
-      signupBtn.type = "submit";
-      console.log("signupBtn clicked");
+    } else {
+      // If in login mode, expand the form to reveal signup fields.
       card.classList.add("expanded");
-    });
-  }
+      console.log("signupBtn clicked: expanding form for signup");
+    }
+  });
 
-  
-
-
-
-  
-  
-
+  // Input focus and blur styling.
   const inputs = document.querySelectorAll("input");
   inputs.forEach((input) => {
     input.addEventListener("focus", () => {

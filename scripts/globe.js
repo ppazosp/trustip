@@ -171,7 +171,7 @@ searchInput.addEventListener('keydown', function(event) {
   }
 });
 
-if (window.innerWidth > 600) {
-loadScriptsSequentially(scriptUrls);
+if (window.innerWidth > 900) {
+    loadScriptsSequentially(scriptUrls);
 }
 
