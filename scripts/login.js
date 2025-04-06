@@ -7,11 +7,9 @@ window.addEventListener('DOMContentLoaded', () => {
   loginBtn.addEventListener("click", (e) => {
     e.preventDefault();
     if (card.classList.contains("expanded")) {
-      // If in signup mode, collapse the form to switch to login mode.
       card.classList.remove("expanded");
       console.log("loginBtn clicked: collapsing form (switching to login mode)");
     } else {
-      // In login mode, validate login fields and process login.
       const username = form.querySelector('input[name="username"]');               
       const password = form.querySelector('input[name="password"]');                  
       
@@ -36,11 +34,9 @@ window.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Signup button click handler.
   signupBtn.addEventListener("click", (e) => {
     e.preventDefault();
     if (card.classList.contains("expanded")) {
-      // If already in signup mode, validate signup fields and process signup.
       const email = form.querySelector('input[name="email"]');                 
       const username = form.querySelector('input[name="username"]');               
       const password = form.querySelector('input[name="password"]');                   
@@ -71,17 +67,14 @@ window.addEventListener('DOMContentLoaded', () => {
         alert(`Errores en el formulario:\n\n${errorMessage}`);
       } else {
         console.log("Signup submit triggered");
-        // Place your custom signup processing code here.
         form.requestSubmit();
       }
     } else {
-      // If in login mode, expand the form to reveal signup fields.
       card.classList.add("expanded");
       console.log("signupBtn clicked: expanding form for signup");
     }
   });
 
-  // Input focus and blur styling.
   const inputs = document.querySelectorAll("input");
   inputs.forEach((input) => {
     input.addEventListener("focus", () => {
